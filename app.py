@@ -1,8 +1,16 @@
-def add(a,b):
-    return a+b
+from flask import Flask, request, jsonify
 
+app = Flask(__name__)
 
-if __name__ == "__main__":  
-    print(f"2 + 3 = {add(2,3)}")
-    print(f"-1 + 1 = {add(-1,1)}")
-    print(f"-1 + 1 = {add(-1,1)}")
+@app.route('/')
+def home():
+    return "Welcome to the Advanced CI/CD Demo!"
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    data = request.get_json()
+    return jsonify({"input": data, "output": "predicted-value"})
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
+
